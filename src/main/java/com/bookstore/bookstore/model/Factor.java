@@ -1,18 +1,19 @@
 package com.bookstore.bookstore.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @Table(schema = SchemaName.SchemaName)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Factor extends BaseEntity {
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    //@JoinColumn(name = "user_id")
     private User user;
+    @Enumerated(EnumType.STRING)
+    private Payed payed;
 }
