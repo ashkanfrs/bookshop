@@ -13,30 +13,32 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class ShoppingCardServiceImpl implements ShoppingCardService{
+public class ShoppingCardServiceImpl implements ShoppingCardService {
     private final FactorRepository factorRepository;
     private final UserRepository userRepository;
     private final ShoppingCardRepository shoppingCardRepository;
     private final BookRepository bookRepository;
-    public ShoppingCardServiceImpl(FactorRepository factorRepository, UserRepository userRepository, ShoppingCardRepository shoppingCardRepository, BookRepository bookRepository){
+
+    public ShoppingCardServiceImpl(FactorRepository factorRepository, UserRepository userRepository, ShoppingCardRepository shoppingCardRepository, BookRepository bookRepository) {
         this.factorRepository = factorRepository;
         this.userRepository = userRepository;
         this.shoppingCardRepository = shoppingCardRepository;
         this.bookRepository = bookRepository;
     }
+
     @Override
     @Transactional
     public ShoppingCardResponse addShopingCard(ShoppingCardRequest shoppingCardRequest) {
-        User user= userRepository.findById(shoppingCardRequest.getUserId())
-                .orElseThrow(()->new RuntimeException("user.not.exist"));
+        User user = userRepository.findById(shoppingCardRequest.getUserId())
+                .orElseThrow(() -> new RuntimeException("user.not.exist"));
         Book book = bookRepository.findById(shoppingCardRequest.getBookId())
                 .orElseThrow(() -> new RuntimeException("book.not.exist"));
         Optional<Factor> byId = factorRepository.findByUserAndPayed(user, Payed.UPAYED);
         Factor factor;
         factor = byId.orElseGet(() -> creatFactor(user));
         factorRepository.save(factor);
-        ShoppingCard shoppingCard = creatShoppingCard(shoppingCardRequest ,book ,factor);
-        return creatShoppingCardResponse( shoppingCardRepository.save(shoppingCard));
+        ShoppingCard shoppingCard = creatShoppingCard(shoppingCardRequest, book, factor);
+        return creatShoppingCardResponse(shoppingCardRepository.save(shoppingCard));
 
     }
 
@@ -55,7 +57,7 @@ public class ShoppingCardServiceImpl implements ShoppingCardService{
     }
 
     private ShoppingCard creatShoppingCard(ShoppingCardRequest shoppingCardRequest, Book book, Factor factor) {
-       return ShoppingCard.builder()
+        return ShoppingCard.builder()
                 .book(book)
                 .factor(factor)
                 .count(shoppingCardRequest.getCount())

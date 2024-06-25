@@ -25,23 +25,27 @@ public class BookController {
         return ResponseEntity.ok(bookService.save(book));
 
     }
+
     @GetMapping
-    public ResponseEntity<Page<BookResponse>> getAll(Pageable pageable){
+    public ResponseEntity<Page<BookResponse>> getAll(Pageable pageable) {
         return ResponseEntity.ok(bookService.findAll(pageable));
 
     }
+
     @GetMapping("/{name}")
-    public ResponseEntity<List<BookResponse>> findByName(@PathVariable String name){
+    public ResponseEntity<List<BookResponse>> findByName(@PathVariable String name) {
         return ResponseEntity.ok(
                 bookService.findByName(name));
 
     }
+
     @GetMapping("/id/{id}")
-    public ResponseEntity<BookResponse> findById(@PathVariable Long id){
+    public ResponseEntity<BookResponse> findById(@PathVariable Long id) {
         return ResponseEntity.ok(bookService.findById(id));
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteBook(@PathVariable Long id){
+    public ResponseEntity<?> deleteBook(@PathVariable Long id) {
         bookService.deleted(id);
         return ResponseEntity.ok().build();
     }

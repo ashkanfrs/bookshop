@@ -18,9 +18,10 @@ public class ShoppingCardController {
     public ShoppingCardController(ShoppingCardService shoppingCardService) {
         this.shoppingCardService = shoppingCardService;
     }
-@PostMapping
-    private ResponseEntity<ShoppingCardResponse> addBook(@RequestBody @Valid ShoppingCardRequest shoppingCardRequest){
-     return ResponseEntity.ok(shoppingCardService.addShopingCard(shoppingCardRequest));
+
+    @PostMapping
+    private ResponseEntity<ShoppingCardResponse> addBook(@RequestBody @Valid ShoppingCardRequest shoppingCardRequest) {
+        return ResponseEntity.ok(shoppingCardService.addShopingCard(shoppingCardRequest));
 
     }
 }
