@@ -13,7 +13,7 @@ An online bookstore application built with Spring Boot. This project features us
 
 - Spring Boot
 - Spring Data JPA
-- PostgresSQL
+- PostgreSQL
 
 ## Getting Started
 
@@ -21,7 +21,7 @@ An online bookstore application built with Spring Boot. This project features us
 
 - Java 11 or higher
 - Maven
-- PostgresSQL
+- PostgreSQL
 
 ### Installation
 
@@ -33,7 +33,7 @@ An online bookstore application built with Spring Boot. This project features us
     ```bash
     cd bookshop
     ```
-3. Set up the PostgresSQL database:
+3. Set up the PostgreSQL database:
     ```sql
     CREATE DATABASE bookshop;
     ```
